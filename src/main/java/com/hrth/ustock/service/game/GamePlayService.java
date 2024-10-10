@@ -67,7 +67,6 @@ public class GamePlayService {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserException(USER_NOT_FOUND));
 
         List<GameStockInfo> stockInfoList = gameStockInfoRepository.findAll();
-        // TODO: 이후에 실제 데이터 추가하고 주석 해제
         Collections.shuffle(stockInfoList);
 
         List<GameStocksRedisDto> selectedList = new ArrayList<>();
@@ -158,7 +157,6 @@ public class GamePlayService {
         long prev = userInfo.getPrev();
 
         return GameUserResponseDto.builder()
-                // TODO: 디버깅 끝나면 year 삭제
                 .year(getGameYear(userId))
                 .nickname(userInfo.getNickname())
                 .total(total)
@@ -308,7 +306,6 @@ public class GamePlayService {
             String nickname = userInfo.getPlayerType() == USER ? userInfo.getNickname() : userInfo.getName();
             gameResultList.add(
                     GameResultResponseDto.builder()
-                            // TODO: 디버깅 끝나면 year 삭제
                             .year(getGameYear(userId))
                             .nickname(nickname)
                             .playerType(userInfo.getPlayerType())
@@ -483,7 +480,6 @@ public class GamePlayService {
         long totalPrice = (long) price * quantity;
 
         if (totalPrice > userInfo.getBudget()) {
-            // TODO: AI 로직 수정할때까지만 임시로 추가한 return state
             if (playerId != USER_INDEX) return;
             throw new GameException(NOT_ENOUGH_BUDGET);
         }
@@ -535,7 +531,6 @@ public class GamePlayService {
                 .orElseThrow(() -> new GameException(NO_HOLDING_STOCK));
 
         if (holding.getQuantity() < quantity) {
-            // TODO: AI 로직 수정할때까지만 임시로 추가한 return state
             if (playerId != USER_INDEX) return;
             throw new GameException(NOT_ENOUGH_QUANTITY);
         }

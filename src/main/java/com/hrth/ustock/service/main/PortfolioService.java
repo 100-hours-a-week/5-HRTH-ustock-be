@@ -165,7 +165,6 @@ public class PortfolioService {
         holdingRepository.save(holding);
     }
 
-    // 10. 개별 종목 추가 매수
     @Transactional
     public void additionalBuyStock(Long pfId, String code, HoldingRequestDto holdingRequestDto) {
 
@@ -181,7 +180,6 @@ public class PortfolioService {
         target.additionalBuyHolding(quantity, price);
     }
 
-    // 11. 개별 종목 수정
     @Transactional
     public void editHolding(Long pfId, String code, HoldingRequestDto holdingRequestDto) {
 
@@ -196,7 +194,6 @@ public class PortfolioService {
         target.updateHolding(quantity, price);
     }
 
-    // 12. 개별 종목 삭제
     @Transactional
     public void deleteHolding(Long pfId, String code) {
 
@@ -210,7 +207,6 @@ public class PortfolioService {
         portfolio.getHoldings().remove(target);
     }
 
-    // 13. 포트폴리오 삭제
     @Transactional
     public void deletePortfolio(Long pfId) {
 
@@ -219,7 +215,6 @@ public class PortfolioService {
 
         List<Holding> list = portfolio.getHoldings();
 
-        // 보유 종목 없을시 바로 삭제, 아니면 보유종목 전부 삭제
         if (list != null && !list.isEmpty()) {
             holdingRepository.deleteAll(list);
         }

@@ -36,7 +36,5 @@ public interface StockServiceConst {
     String REDIS_CHART_HIGH_KEY = "high";
     String REDIS_CHART_LOW_KEY = "low";
     String REDIS_DATE_KEY = "date";
-    String REDIS_ORDER_TOP = "top";
-    String REDIS_ORDER_TRADE = "trade";
 
 }

@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameResultResponseDto {
-    // TODO: 디버깅 끝나면 year 삭제
     private int year;
     private String nickname;
     private long total;

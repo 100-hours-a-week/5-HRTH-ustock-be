@@ -58,12 +58,6 @@ public interface GameApi {
     })
     ResponseEntity<List<GameStockInfoResponseDto>> startGame(@RequestParam String nickname);
 
-//    @Operation(
-//            summary = "경쟁자 정보 조회 요청",
-//            description = "현재 연도의 플레이어들(ai) 정보를 가져옵니다."
-//    )
-//    ResponseEntity<List<GameUserResponseDto>> showPlayer();
-
     @Operation(
             summary = "유저 정보 조회 요청",
             description = "현재 연도의 유저 정보를 가져옵니다."

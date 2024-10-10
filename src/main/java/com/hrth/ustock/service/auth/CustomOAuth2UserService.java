@@ -33,7 +33,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         );
 
         if (existData == null) {
-            // 새로운 유저 저장(nickname, profileImage = null)
             User newUser = User.builder()
                     .providerName(oAuth2Response.getName())
                     .provider(oAuth2Response.getProvider())
@@ -44,7 +43,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             User saved = userRepository.save(newUser);
             return new CustomOAuth2User(saved.toOAuthDto());
         } else {
-            // provider 로부터 변경된 user 정보 update
             UserOauthDto userOauthDTO = UserOauthDto.builder()
                     .providerName(oAuth2User.getAttribute("name"))
                     .profile(oAuth2User.getAttribute("picture"))
@@ -61,7 +59,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .getClientRegistration()
                 .getRegistrationId();
 
-        // 코드로 토큰 요청, 토큰 발급
         OAuth2Response oAuth2Response;
         if (registrationId.equals("google")) {
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());

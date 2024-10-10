@@ -255,7 +255,6 @@ public class StockService {
         };
     }
 
-    // 현재가, 전일대비, 전일 대비 부호, 전일 대비율 조회
     protected Map<String, String> getCurrentChangeChangeRate(String code) {
         String current = (String) redisTemplate.opsForHash().get(code, REDIS_CURRENT_KEY);
         String change = (String) redisTemplate.opsForHash().get(code, REDIS_CHANGE_KEY);
@@ -328,7 +327,6 @@ public class StockService {
         String startDate = originDate.minusDays(5).format(newFormatter);
         String endDate = originDate.format(newFormatter);
 
-        // TODO: 종목 목업 데이터에 상장날짜 전부 넣어둬야함(API 호출 1회로 단축)
         String publicParams = "?PRDT_TYPE_CD=300&PDNO=" + code;
 
         String publicUri = "/uapi/domestic-stock/v1/quotations/search-stock-info";
@@ -342,7 +340,6 @@ public class StockService {
         if (publicDate.compareTo(startDate) > 0 || !"".equals(privateDate))
             throw new StockException(STOCK_NOT_PUBLIC);
 
-        // 과거 주식시세 요청
         String queryParams = "?fid_cond_mrkt_div_code=J" +
                 "&fid_input_iscd=" + code +
                 "&fid_input_date_1=" + startDate +
@@ -371,7 +368,6 @@ public class StockService {
         if (requestDto.getPrice() < Integer.parseInt(previous))
             throw new StockException(STOCK_CANNOT_PURCHASE);
 
-        // 현재가 기반 계산
         Map<String, String> redisMap = getCurrentChangeChangeRate(code);
         if (redisMap == null)
             throw new StockException(CURRENT_NOT_FOUND);

@@ -49,7 +49,6 @@ public class StockCronService {
     private static final DateTimeFormatter mysqlFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private final RedisJsonManager redisJsonManager;
 
-    // 주중 오전 9시에 시작해서 30분마다 실행하고 오후 15시 30분에 끝남
     // 종목별 현재가, 당일 차트 데이터 redis에 갱신
     public void saveStockData() {
         log.info("현재가 크론잡 시작");
@@ -81,7 +80,6 @@ public class StockCronService {
                 continue;
             }
 
-            // stock data
             String current = output1.get(STOCK_CURRENT_PRICE);
             String change = output1.get(CHANGE_FROM_PREVIOUS_STOCK);
             String changeRate = output1.get(CHANGE_RATE_FROM_PREVIOUS_STOCK);
@@ -93,7 +91,6 @@ public class StockCronService {
 
             List<Map<String, String>> output2 = (List<Map<String, String>>) response.get("output2");
             // 분봉
-            // redis에 json String으로 저장함
             String high = output1.get(STOCK_MARKET_HIGH);
             String low = output1.get(STOCK_MARKET_LOW);
             String open = output1.get(STOCK_MARKET_OPEN);
@@ -193,7 +190,6 @@ public class StockCronService {
                 continue;
             }
 
-            // chart data
             String high = output2.get(0).get(STOCK_HIGH);
             String low = output2.get(0).get(STOCK_LOW);
             String open = output2.get(0).get(STOCK_OPEN);

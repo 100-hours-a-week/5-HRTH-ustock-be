@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CronController {
     private final StockCronService stockCronService;
 
-    // 주중 오전 9시에 시작해서 30분마다 실행하고 오후 16시 15분에 끝남
+    // 주중 오전 9시에 시작해서 5분마다 실행하고 오후 16시 15분에 끝남
     // 현재가, 등락, 등락율, 날짜를 redis에 저장
-    @Scheduled(cron = "0 */15 8-15 * * MON-SAT")
-    @Scheduled(cron = "0 0,15 16 * * MON-SAT")
+    @Scheduled(cron = "0 */5 8-15 * * MON-SAT")
+    @Scheduled(cron = "0 0-15/5 16 * * MON-SAT")
     public void setStockData() {
         stockCronService.saveStockData();
     }
